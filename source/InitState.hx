@@ -82,6 +82,8 @@ class InitState extends FlxState
 		cpp.vm.tracy.TracyProfiler.setThreadName("main");
 		#end
 		
+		MobileData.init();
+		
 		super.create();
 		
 		FlxG.switchState(() -> #if debug Type.createInstance(Main.game.initialState, []) #else new FlxSplashIntro() #end);
@@ -89,6 +91,8 @@ class InitState extends FlxState
 	
 	public static function onGameResize(w:Float, h:Float)
 	{
+		if (FPSCounter.instance != null) FPSCounter.instance.positionFPS(10, 3, Math.min(w / FlxG.width, h / FlxG.height));
+		
 		if (FlxG.cameras != null)
 		{
 			for (cam in FlxG.cameras.list)

@@ -2,6 +2,10 @@
 // Discord API
 import funkin.backend.DiscordClient;
 
+//mobile
+import funkin.mobile.backend.MobileData;
+import funkin.mobile.backend.StorageUtil;
+
 #if sys
 import sys.*;
 
