@@ -4,6 +4,8 @@ import funkin.backend.ClientPrefs;
 
 import flixel.FlxSprite;
 
+import debug.FPSCounter;
+
 import funkin.game.VideoCutscene;
 
 import flixel.system.scaleModes.RelativeScaleMode;

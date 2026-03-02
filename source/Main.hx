@@ -38,6 +38,8 @@ import funkin.backend.ClientPrefs;
 import funkin.states.CopyState;
 #end
 
+import lime.system.System as LimeSystem;
+
 class Main extends Sprite
 {
 	public static final game =
