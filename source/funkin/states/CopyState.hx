@@ -30,6 +30,7 @@ import openfl.utils.ByteArray;
 import haxe.io.Path;
 import flixel.ui.FlxBar;
 import flixel.ui.FlxBar.FlxBarFillDirection;
+import flixel.FlxState;
 
 /**
  * ...
