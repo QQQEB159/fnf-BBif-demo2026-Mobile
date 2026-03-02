@@ -35,7 +35,7 @@ import flixel.ui.FlxBar.FlxBarFillDirection;
  * ...
  * @author: Karim Akra
  */
-class CopyState extends MusicBeatState
+class CopyState extends FlxState
 {
 	private static final textFilesExtensions:Array<String> = ['ini', 'txt', 'xml', 'hxs', 'hx', 'lua', 'json', 'frag', 'vert'];
 	public static final IGNORE_FOLDER_FILE_NAME:String = "CopyState-Ignore.txt";

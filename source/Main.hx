@@ -103,11 +103,11 @@ class FNFGame extends FlxGame
 {
 	override function create(_:Event)
 	{
-		_customSoundTray = CustomSoundTray;
+		//_customSoundTray = CustomSoundTray;
 		super.create(_);
 		
-		FlxG.sound.soundTray.volumeDownSound = 'assets/sounds/soundTrayMinus';
-		FlxG.sound.soundTray.volumeUpSound = 'assets/sounds/soundTrayPlus';
+		//FlxG.sound.soundTray.volumeDownSound = 'assets/sounds/soundTrayMinus';
+		//FlxG.sound.soundTray.volumeUpSound = 'assets/sounds/soundTrayPlus';
 		
 		// // KILL EVERYONE
 		// // atleast we arent shadowing flixel classes yahoo!
