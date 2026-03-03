@@ -270,6 +270,10 @@ function moveThinkpad(appear)
 		
 		FlxTween.tween(thinkCam.scroll, {y: 0}, time * 2, {ease: ease});
 		FlxTween.tween(thinkCam, {alpha: 1}, time * 2, {ease: ease});
+		
+		FlxTimer.wait(1, () -> {
+		    mobileControls.instance.visible = false;
+		});
 	}
 	else
 	{
@@ -283,6 +287,7 @@ function moveThinkpad(appear)
 					atlasCover.kill();
 					// unlock keys after because people keep pressing r while readjusting themself
 					mathResolver.disableKeys(false);
+					mobileControls.instance.visible = true;
 				}
 			});
 	}

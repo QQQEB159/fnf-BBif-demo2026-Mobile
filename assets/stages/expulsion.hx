@@ -267,6 +267,16 @@ function onCountdownStarted()
 	{
 		i.fadeIn(1);
 	}
+	
+	removeMobileControls();
+	addMobileControls();
+	mobileControls.instance.visible = true;
+	mobileControls.onButtonDown.add(onButtonPress);
+	mobileControls.onButtonUp.add(onButtonRelease);
+	mobileControls.instance.buttonLeft.color = 0xFF12FA05;
+    mobileControls.instance.buttonDown.color = 0xFFF9393F;
+    mobileControls.instance.buttonUp.color = 0xFF00FFFF;
+    mobileControls.instance.buttonRight.color = 0xFFFFA500;
 }
 
 function opponentNoteHit(note:Note)

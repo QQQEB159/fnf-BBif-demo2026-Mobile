@@ -636,6 +636,10 @@ class PlayState extends MusicBeatState
 		mobileControls.instance.visible = false;
 		mobileControls.onButtonDown.add(onButtonPress);
 		mobileControls.onButtonUp.add(onButtonRelease);
+		mobileControls.buttonLeft.color = 0xFF12FA05;
+        mobileControls.buttonDown.color = 0xFFF9393F;
+        mobileControls.buttonUp.color = 0xFF00FFFF;
+        mobileControls.buttonRight.color = 0xFFFFA500;
 		
 		if (isStoryMode)
 		{

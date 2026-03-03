@@ -162,6 +162,10 @@ function onGameOver()
 		
 		FlxTween.tween(popUp, {'scale.x': 1, 'scale.y': 1}, 0.05, {ease: FlxEase.cubeInOut});
 		
+		addTouchPad("NONE", "A_B");
+		addTouchPadCamera();
+		mobileControls.instance.visible = false;
+		
 		return Constants.SCRIPT_STOP;
 	}
 	
