@@ -39,10 +39,7 @@ class OptionsState extends MusicBeatState
 	function openSelectedSubstate(label:String)
 	{
 		if (label != "Adjust Delay")
-		{
-		    persistentUpdate = false;
 		    removeTouchPad();
-		}
 		    
 		switch (label)
 		{
@@ -193,7 +190,6 @@ class OptionsState extends MusicBeatState
 		if (subState is BaseOptionsMenu || subState is ControlsSubState) grpOptions.visible = underline.visible = canSelect = true;
 		super.closeSubState();
 		ClientPrefs.saveSettings();
-		persistentUpdate = true;
 		controls.isInSubstate = false;
         removeTouchPad();
 		addTouchPad("UP_DOWN", "A_B_C");

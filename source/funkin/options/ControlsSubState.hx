@@ -101,7 +101,7 @@ class ControlsSubState extends MusicBeatSubstate
 		
 		createTexts();
 		
-		addTouchPad("LEFT_FULL", "B");
+		addTouchPad("NONE", "B");
 	}
 	
 	var lastID:Int = 0;
@@ -273,7 +273,7 @@ class ControlsSubState extends MusicBeatSubstate
 		
 		if (!binding)
 		{
-			if (FlxG.keys.justPressed.ESCAPE || FlxG.gamepads.anyJustPressed(B))
+			if (FlxG.keys.justPressed.ESCAPE || FlxG.gamepads.anyJustPressed(B) || touchPad.buttonB.justPressed)
 			{
 				close();
 				return;
