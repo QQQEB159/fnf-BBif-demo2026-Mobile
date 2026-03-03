@@ -73,7 +73,7 @@ class PaldoPopUp extends MusicBeatSubstate
 						});
 				}
 			}
-			else if (controls.BACK || FlxG.mouse.justPressedRight)
+			else if (controls.BACK || FlxG.mouse.justPressedRight || FlxG.android.justReleased.BACK)
 			{
 				canInteract = false;
 				

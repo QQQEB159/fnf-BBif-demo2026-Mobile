@@ -168,6 +168,7 @@ class FreeplayState extends MusicBeatUIState
 		super.closeSubState();
 		removeTouchPad();
 		addTouchPad("LEFT_FULL", "A_B_X_Y");
+		addTouchPadCamera();
 	}
 	
 	function playIntro()
@@ -283,8 +284,7 @@ class FreeplayState extends MusicBeatUIState
 				openSubState(new funkin.substates.GameplayChangersSubstate());
 				removeTouchPad();
 			}
-			else if (FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed
-				|| (FlxG.mouse.overlaps(jukeBox) && FlxG.mouse.justPressed) #if !debug && !songMetas.members[curSel].isHidden #end)
+			else if (FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed)
 			{
 				if (selectedMusic != curSel) loadMusic();
 				else pauseMusic();

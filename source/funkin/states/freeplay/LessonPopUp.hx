@@ -84,8 +84,8 @@ class LessonPopUp extends MusicBeatSubstate
 		
 		FlxTimer.wait(0.8, () -> canInteract = true);
 		
-		addTouchPad("NONE", "B");
-		addTouchPadCamera();
+		//addTouchPad("NONE", "B");
+		//addTouchPadCamera();
 	}
 	
 	function transitionOut()
@@ -169,7 +169,7 @@ class LessonPopUp extends MusicBeatSubstate
 						});
 				}
 			}
-			else if (controls.BACK || FlxG.mouse.justPressedRight)
+			else if (controls.BACK || FlxG.mouse.justPressedRight || FlxG.android.justReleased.BACK)
 			{
 				canInteract = false;
 				transitionOut();
