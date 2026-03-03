@@ -100,6 +100,8 @@ class ControlsSubState extends MusicBeatSubstate
 		add(text);
 		
 		createTexts();
+		
+		addTouchPad("LEFT_FULL", "B");
 	}
 	
 	var lastID:Int = 0;

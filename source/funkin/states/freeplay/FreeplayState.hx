@@ -157,7 +157,17 @@ class FreeplayState extends MusicBeatUIState
 		
 		curDifficulty = FlxMath.maxInt(0, Difficulty.defaultList.indexOf(lastDifficulty));
 		
+		addTouchPad("LEFT_FULL", "A_B_X_Y");
+		addTouchPadCamera();
+		
 		super.create();
+	}
+	
+	override function closeSubState() {
+		persistentUpdate = true;
+		super.closeSubState();
+		removeTouchPad();
+		addTouchPad("LEFT_FULL", "A_B_X_Y");
 	}
 	
 	function playIntro()
@@ -267,12 +277,13 @@ class FreeplayState extends MusicBeatUIState
 				canInteract = false;
 				FlxG.switchState(() -> new PlayMenuState());
 			}
-			else if (FlxG.keys.justPressed.CONTROL)
+			else if (FlxG.keys.justPressed.CONTROL || touchPad.buttonY.justPressed)
 			{
 				persistentUpdate = false;
 				openSubState(new funkin.substates.GameplayChangersSubstate());
+				removeTouchPad();
 			}
-			else if (FlxG.keys.justPressed.SPACE
+			else if (FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed
 				|| (FlxG.mouse.overlaps(jukeBox) && FlxG.mouse.justPressed) #if !debug && !songMetas.members[curSel].isHidden #end)
 			{
 				if (selectedMusic != curSel) loadMusic();
@@ -508,13 +519,17 @@ class FreeplayState extends MusicBeatUIState
 		if (songName == 'Lesson')
 		{
 			canInteract = false;
+			persistentUpdate = false;
 			openSubState(new LessonPopUp());
+			removeTouchPad();
 			return;
 		}
 		if (songName == 'Firewall')
 		{
 			canInteract = false;
+			persistentUpdate = false;
 			openSubState(new PaldoPopUp());
+			removeTouchPad();
 			return;
 		}
 		loadSong(songName);

@@ -83,6 +83,9 @@ class LessonPopUp extends MusicBeatSubstate
 		FlxTween.tween(badMix, {alpha: 1}, 0.3, {startDelay: 0.6, framerate: 24});
 		
 		FlxTimer.wait(0.8, () -> canInteract = true);
+		
+		addTouchPad("NONE", "B");
+		addTouchPadCamera();
 	}
 	
 	function transitionOut()

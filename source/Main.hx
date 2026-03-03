@@ -17,8 +17,6 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 
-import debug.FPSCounter;
-
 import flixel.FlxG;
 
 import funkin.utils.MacroUtil;
@@ -79,8 +77,6 @@ class Main extends Sprite
 		
 		ClientPrefs.tryBindingSave('funkin');
 		addChild(new FNFGame(game.width, game.height, #if COPYSTATE_ALLOWED !CopyState.checkExistingFiles() ? CopyState : #end InitState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
-		
-		FPSCounter.init();
 		
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];

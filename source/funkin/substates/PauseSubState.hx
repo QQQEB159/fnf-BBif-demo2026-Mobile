@@ -136,6 +136,9 @@ class PauseSubState extends MusicBeatSubstate
 		
 		CoolUtil.addShader(ditherShader, camera);
 		FlxTween.tween(ditherShader, {transparency: 1}, 0.25);
+		
+		addTouchPad("UP_DOWN", "A");
+		addTouchPadCamera();
 	}
 	
 	var holdTime:Float = 0;

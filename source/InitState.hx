@@ -51,6 +51,8 @@ class InitState extends FlxState
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.keys.preventDefaultKeys = [TAB];
 		
+		FPSCounter.init();
+		
 		FlxG.signals.postStateSwitch.add(onStateSwitchPost);
 		FlxG.signals.gameResized.add(onGameResize);
 		

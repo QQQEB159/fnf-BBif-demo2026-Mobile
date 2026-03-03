@@ -63,6 +63,8 @@ class PlayMenuState extends MusicBeatState
 		descriptionTxt.shader = new ChalkShader();
 		
 		changeSel();
+		
+		addTouchPad("NONE", "B");
 	}
 	
 	var selectedSomething:Bool = false;

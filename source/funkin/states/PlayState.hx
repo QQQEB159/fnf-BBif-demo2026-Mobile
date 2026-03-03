@@ -632,6 +632,11 @@ class PlayState extends MusicBeatState
 			eventNotes.sort(sortByTime);
 		}
 		
+		addMobileControls();
+		mobileControls.instance.visible = false;
+		mobileControls.onButtonDown.add(onButtonPress);
+		mobileControls.onButtonUp.add(onButtonRelease);
+		
 		if (isStoryMode)
 		{
 			if (SONG.song.toLowerCase() != 'basics' && !seenCutscene)
@@ -672,6 +677,11 @@ class PlayState extends MusicBeatState
 		cacheCountdown();
 		
 		setWindowName();
+		
+		#if (!android)
+		addTouchPad("NONE", "P");
+ 		addTouchPadCamera();
+		#end
 		
 		super.create();
 		FunkinAssets.cache.clearUnusedMemory();
@@ -1032,7 +1042,7 @@ class PlayState extends MusicBeatState
 			
 			countdownDelay = Conductor.crochet;
 			
-			startedCountdown = true;
+			mobileControls.instance.visible = startedCountdown = true;
 			Conductor.songPosition = -countdownDelay * 5;
 			setOnScripts('startedCountdown', true);
 			callOnScripts('onCountdownStarted', null);
@@ -1774,7 +1784,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 		
-		if (controls.PAUSE && startedCountdown && canPause)
+		if ((controls.PAUSE #if android || FlxG.android.justReleased.BACK #else || touchPad.buttonP.justPressed #end) && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
 			if (ret != Constants.SCRIPT_STOP)
@@ -2648,6 +2658,8 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		seenCutscene = false;
 		
+		mobileControls.instance.visible = #if !android touchPad.visible = #end false;
+		
 		#if ACHIEVEMENTS_ALLOWED
 		var weekNoMiss:String = WeekData.getWeekFileName() + '_nomiss';
 		checkForAchievement([weekNoMiss, 'ur_bad', 'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
@@ -3078,6 +3090,28 @@ class PlayState extends MusicBeatState
 			}
 		}
 		return -1;
+	}
+	
+	function onButtonPress(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		callOnScripts('onButtonPressPre', [buttonCode]);
+		if (button.justPressed) keyPressed(buttonCode);
+		callOnScripts('onButtonPress', [buttonCode]);
+	}
+
+	function onButtonRelease(button:TouchButton):Void
+	{
+		if (button.IDs.filter(id -> id.toString().startsWith("EXTRA")).length > 0)
+			return;
+
+		var buttonCode:Int = (button.IDs[0].toString().startsWith('NOTE')) ? button.IDs[0] : button.IDs[1];
+		callOnScripts('onButtonReleasePre', [buttonCode]);
+		if(buttonCode > -1) keyReleased(buttonCode);
+		callOnScripts('onButtonRelease', [buttonCode]);
 	}
 	
 	// Hold notes

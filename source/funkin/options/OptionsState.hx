@@ -12,13 +12,15 @@ import funkin.backend.StageData;
 import flixel.math.FlxRect;
 import flixel.util.FlxDestroyUtil;
 
+import funkin.mobile.substates.MobileControlSelectSubState;
+
 class OptionsState extends MusicBeatState
 {
 	public static var onPlayState:Bool = false;
 	
 	static var curSel:Int = 0;
 	
-	final options:Array<String> = ['Controls', 'Adjust Delay', 'Performance', 'Visuals and UI', 'Gameplay'];
+	final options:Array<String> = ['Controls', 'Adjust Delay', 'Performance', 'Visuals and UI', 'Gameplay', 'Mobile Options'];
 	
 	var grpOptions:FlxTypedGroup<OptionFlxText>;
 	
@@ -36,6 +38,7 @@ class OptionsState extends MusicBeatState
 	
 	function openSelectedSubstate(label:String)
 	{
+		if (label != "Adjust Delay") removeTouchPad();
 		switch (label)
 		{
 			case 'Controls':
@@ -48,6 +51,8 @@ class OptionsState extends MusicBeatState
 				openSubState(new funkin.options.GameplaySettingsSubState());
 			case 'Adjust Delay':
 				FlxG.switchState(() -> new funkin.options.NoteOffsetState());
+			case 'Mobile Options':
+				openSubState(new funkin.mobile.options.MobileOptionsSubState());
 		}
 	}
 	
@@ -127,6 +132,8 @@ class OptionsState extends MusicBeatState
 		
 		openDoor();
 		
+		addTouchPad("UP_DOWN", "A_B_C");
+		
 		super.create();
 	}
 	
@@ -181,6 +188,9 @@ class OptionsState extends MusicBeatState
 		if (subState is BaseOptionsMenu || subState is ControlsSubState) grpOptions.visible = underline.visible = canSelect = true;
 		super.closeSubState();
 		ClientPrefs.saveSettings();
+		controls.isInSubstate = false;
+        removeTouchPad();
+		addTouchPad("UP_DOWN", "A_B_C");
 	}
 	
 	override function update(elapsed:Float)
@@ -227,6 +237,11 @@ class OptionsState extends MusicBeatState
 				else FlxG.switchState(() -> new MainMenuState());
 			}
 			else if (controls.ACCEPT) openSelectedSubstate(options[curSel]);
+			
+			if (touchPad.buttonC.justPressed || FlxG.keys.justPressed.CONTROL && controls.mobileC)
+		    {
+			    openSubState(new MobileControlSelectSubState());
+		    }
 		}
 		
 		final rate = 1 - Math.exp(-elapsed);

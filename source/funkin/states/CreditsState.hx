@@ -108,6 +108,8 @@ class CreditsState extends MusicBeatState
 		var keyString = [for (i in ClientPrefs.keyBinds.get('accept').concat(ClientPrefs.keyBinds.get('back'))) InputFormatter.getKeyName(i)].join(', ');
 		
 		makeCredit(loungeIcon.y + loungeIcon.height + 32, 'Press $keyString to exit');
+		
+		addTouchPad("UP_DOWN", "B");
 	}
 	
 	function makeCredit(y:Float = 0, text:String)

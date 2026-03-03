@@ -109,6 +109,8 @@ class StoryMenu extends MusicBeatUIState
 		{
 			playingIntro = false;
 		}
+		
+		addTouchPad("NONE", "B");
 	}
 	
 	override function update(elapsed:Float)
