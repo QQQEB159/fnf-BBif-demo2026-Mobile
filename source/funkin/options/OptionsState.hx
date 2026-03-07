@@ -243,6 +243,7 @@ class OptionsState extends MusicBeatState
 			if (touchPad != null && touchPad.buttonC.justPressed || FlxG.keys.justPressed.CONTROL && controls.mobileC)
 		    {
 			    openSubState(new MobileControlSelectSubState());
+			    removeTouchPad();
 		    }
 		}
 		
