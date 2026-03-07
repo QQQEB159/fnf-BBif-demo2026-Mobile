@@ -278,13 +278,13 @@ class FreeplayState extends MusicBeatUIState
 				canInteract = false;
 				FlxG.switchState(() -> new PlayMenuState());
 			}
-			else if (FlxG.keys.justPressed.CONTROL || touchPad.buttonY.justPressed)
+			else if (FlxG.keys.justPressed.CONTROL || touchPad != null && touchPad.buttonY.justPressed)
 			{
 				persistentUpdate = false;
 				openSubState(new funkin.substates.GameplayChangersSubstate());
 				removeTouchPad();
 			}
-			else if (FlxG.keys.justPressed.SPACE || touchPad.buttonX.justPressed)
+			else if (FlxG.keys.justPressed.SPACE || touchPad != null && touchPad.buttonX.justPressed)
 			{
 				if (selectedMusic != curSel) loadMusic();
 				else pauseMusic();
@@ -519,7 +519,6 @@ class FreeplayState extends MusicBeatUIState
 		if (songName == 'Lesson')
 		{
 			canInteract = false;
-			persistentUpdate = false;
 			openSubState(new LessonPopUp());
 			removeTouchPad();
 			return;
@@ -527,7 +526,6 @@ class FreeplayState extends MusicBeatUIState
 		if (songName == 'Firewall')
 		{
 			canInteract = false;
-			persistentUpdate = false;
 			openSubState(new PaldoPopUp());
 			removeTouchPad();
 			return;

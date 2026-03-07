@@ -84,8 +84,8 @@ class LessonPopUp extends MusicBeatSubstate
 		
 		FlxTimer.wait(0.8, () -> canInteract = true);
 		
-		//addTouchPad("NONE", "B");
-		//addTouchPadCamera();
+		addTouchPad("NONE", "B");
+		addTouchPadCamera();
 	}
 	
 	function transitionOut()
@@ -145,7 +145,7 @@ class LessonPopUp extends MusicBeatSubstate
 				
 				playSound(curSel == 0);
 			}
-			else if (curSel != -1 && (controls.ACCEPT || (FlxG.mouse.justPressed && (mouseOver(goodMix) || mouseOver(badMix)))))
+			else if (curSel != -1 && (controls.ACCEPT || touchPad != null && touchPad.buttonA.justPressed || (FlxG.mouse.justPressed && (mouseOver(goodMix) || mouseOver(badMix)))))
 			{
 				canInteract = false;
 				@:privateAccess
@@ -169,7 +169,7 @@ class LessonPopUp extends MusicBeatSubstate
 						});
 				}
 			}
-			else if (controls.BACK || FlxG.mouse.justPressedRight || FlxG.android.justReleased.BACK)
+			else if (controls.BACK || FlxG.mouse.justPressedRight || touchPad != null && touchPad.buttonB.justPressed)
 			{
 				canInteract = false;
 				transitionOut();
